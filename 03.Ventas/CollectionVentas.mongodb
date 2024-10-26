@@ -1,0 +1,52 @@
+// Usar la base de datos 
+// Autor: Jonathan Guizar Morales
+// Número de control: 22420408
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
+use("Cremeria");
+
+// Crear la colección con el esquema y validaciones
+db.createCollection('ventas', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'codigo_Pedido', 'año', 'dia', 'mes', 'tipo_pago'],
+            properties: {
+                codigo: { 
+                    bsonType: 'int' 
+                },
+                codigo_Pedido: { 
+                    bsonType: 'int' 
+                },
+                año: { 
+                    bsonType: 'int', 
+                    minimum: 1900, 
+                    maximum: 2024 // Año entre 1900 y 2024
+                },
+                descuento_aplicado: { 
+                    bsonType: 'decimal' 
+                },
+                dia: { 
+                    bsonType: 'int', 
+                    minimum: 1, 
+                    maximum: 31 // Día entre 1 y 31
+                },
+                mes: { 
+                    bsonType: 'string', 
+                    pattern: "^(Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre)$" // Mes completo en español
+                },
+                tipo_pago: { 
+                    bsonType: 'string', 
+                    pattern: "^(Efectivo|Tarjeta|Transferencia|Crédito)$" // Tipos de pago permitidos
+                }
+            }
+        }          
+    }
+});
+
+// Crear un índice único para el campo 'codigo'
+db.ventas.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

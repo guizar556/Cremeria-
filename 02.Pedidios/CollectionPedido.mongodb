@@ -1,0 +1,56 @@
+// Usar la base de datos 
+// Autor: Jonathan Guizar Morales
+// Número de control: 22420408
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
+use("Cremeria");
+
+
+db.createCollection('pedidos', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'año_de_pedido', 'dia_de_pedido', 'mes_de_pedido'],
+            properties: {
+                codigo: { 
+                    bsonType: 'int' 
+                },
+                codigo_Cliente: { 
+                    bsonType: 'int', 
+                    description: "Código del cliente, puede ser null" 
+                },
+                codigo_Empleado: { 
+                    bsonType: 'int', 
+                    description: "Código del empleado, puede ser null" 
+                },
+                descripccion_Pedido: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ0-9,.!? ]{1,255}$", // Alfanumérico, 1 a 255 caracteres
+                    description: "Descripción del pedido, debe ser entre 1 y 255 caracteres"
+                },
+                año_de_pedido: { 
+                    bsonType: 'int', 
+                    minimum: 2000, 
+                    maximum: 2024 // Año entre 2000 y 2024
+                },
+                dia_de_pedido: { 
+                    bsonType: 'int', 
+                    minimum: 1, 
+                    maximum: 31 // Día entre 1 y 31
+                },
+                mes_de_pedido: { 
+                    bsonType: 'string', 
+                    pattern: "^(Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre)$", // Mes completo en español
+                    description: "Mes del pedido en español"
+                }
+            }
+        }
+    }
+});
+
+// Crear un índice único para el campo 'codigo' si deseas evitar duplicados
+db.pedidos.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

@@ -1,0 +1,22 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.devoluciones.insertOne({
+    codigo: 1,
+    codigo_Cliente: 123,
+    año: 2023,
+    CantidadDeProductosDevueltos: 2,
+    DescripccionDeDevolucion: "Devolución de productos en mal estado",
+    DescripccionDeMedidasTomadas: "Se realizó el reembolso correspondiente",
+    diaDevolucion: 15,
+    foto_Devolucion: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fes%2Ffotos%2Fqueso&psig=AOvVaw3avqj5OtWShyhgCAzQ3WKP&ust=1730048919907000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMjrjMzErIkDFQAAAAAdAAAAABAE.png",
+    hora: "14:30",
+    mes: "Marzo",
+    montoDeRembolso: NumberDecimal("150.00")
+});

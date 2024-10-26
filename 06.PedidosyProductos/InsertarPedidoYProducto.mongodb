@@ -1,0 +1,17 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.detalles_pedido.insertOne({
+    codigo: 1,
+    CodigoPedidios: 1001,
+    codigoProductos: 5001,
+    cantidad: 3,
+    precioUnitario: NumberDecimal("20.50")
+});
+

@@ -1,0 +1,42 @@
+// Usar la base de datos 
+// Autor: Jonathan Guizar Morales
+// Número de control: 22420408
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
+use("Cremeria");
+
+// Crear la colección con el esquema y validaciones
+db.createCollection('detalles_pedido', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'CodigoPedidios', 'codigoProductos', 'cantidad'],
+            properties: {
+                codigo: { 
+                    bsonType: 'int' 
+                },
+                CodigoPedidios: { 
+                    bsonType: 'int' 
+                },
+                codigoProductos: { 
+                    bsonType: 'int' 
+                },
+                cantidad: { 
+                    bsonType: 'int', 
+                    minimum: 1 // La cantidad debe ser mayor a 0
+                },
+                precioUnitario: { 
+                    bsonType: 'decimal', 
+                    minimum: 0 // El precio unitario no puede ser negativo
+                }
+            }
+        }          
+    }
+});
+
+// Crear un índice único para el campo 'codigo'
+db.detalles_pedido.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

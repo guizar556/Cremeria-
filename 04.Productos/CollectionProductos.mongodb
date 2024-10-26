@@ -1,0 +1,110 @@
+// Usar la base de datos 
+// Autor: Jonathan Guizar Morales
+// Número de control: 22420408
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
+use("Cremeria");
+
+// Crear la colección con el esquema y validaciones
+db.createCollection('productos', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: [
+                'codigo', 
+                'codigo_Categoria', 
+                'NombreDelProducto', 
+                'Numero_De_lote_del_producto', 
+                'año_de_caducidad', 
+                'dia_de_caducidad', 
+                'mes_de_caducidad', 
+                'condiciones_de_almacenamiento', 
+                'nutrientes_que_Aporta',
+                'precioPorKilogramo', 
+                'margen_de_ganancia', 
+                'stock_minimo', 
+                'stock_maximo', 
+                'punto_de_reorden', 
+                'stack_disponible', 
+                'unidad_de_medida'
+            ],
+            properties: {
+                codigo: { 
+                    bsonType: 'int' 
+                },
+                codigo_Categoria: { 
+                    bsonType: 'int' 
+                },
+                NombreDelProducto: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ0-9 ]{2,100}$" // 2 a 100 caracteres
+                },
+                Numero_De_lote_del_producto: { 
+                    bsonType: 'int', 
+                    minimum: 1 // Lote mayor a 0
+                },
+                año_de_caducidad: { 
+                    bsonType: 'int', 
+                    minimum: 2024, // Año a partir del 2024 en adelante
+                    maximum: 2100 // Limitar el año hasta 2100
+                },
+                dia_de_caducidad: { 
+                    bsonType: 'int', 
+                    minimum: 1, 
+                    maximum: 31 // Día entre 1 y 31
+                },
+                mes_de_caducidad: { 
+                    bsonType: 'string', 
+                    pattern: "^(Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre)$" // Mes completo en español
+                },
+                condiciones_de_almacenamiento: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ0-9 ]{2,200}$" // 2 a 200 caracteres
+                },
+                nutrientes_que_Aporta: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ0-9, ]{2,200}$" // Nutrientes permitidos
+                },
+                precioPorKilogramo: { 
+                    bsonType: 'decimal', 
+                    minimum: 0 // Precio no puede ser negativo
+                },
+                margen_de_ganancia: { 
+                    bsonType: 'decimal', 
+                    minimum: 0 // Margen no puede ser negativo
+                },
+                stock_minimo: { 
+                    bsonType: 'int', 
+                    minimum: 0 // Stock mínimo no puede ser negativo
+                },
+                stock_maximo: { 
+                    bsonType: 'int', 
+                    minimum: 0 // Stock máximo no puede ser negativo
+                },
+                punto_de_reorden: { 
+                    bsonType: 'int', 
+                    minimum: 0 // Punto de reorden no puede ser negativo
+                },
+                stack_disponible: { 
+                    bsonType: 'int', 
+                    minimum: 0 // Stock disponible no puede ser negativo
+                },
+                unidad_de_medida: { 
+                    bsonType: 'string', 
+                    pattern: "^(Kilogramo|Gramo|Litro|Mililitro|Unidad)$" // Unidades permitidas
+                },
+                foto: {
+                    bsonType: 'string',
+                    pattern: "^(https?:\\/\\/.*\\.(jpg|jpeg|png|gif|bmp))$" // URL válida de imagen
+                }
+            }
+        }          
+    }
+});
+
+// Crear un índice único para el campo 'codigo'
+db.productos.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

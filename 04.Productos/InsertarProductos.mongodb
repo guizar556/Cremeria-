@@ -1,0 +1,28 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.productos.insertOne({
+    codigo: 1,
+    codigo_Categoria: 2,
+    NombreDelProducto: "Leche Entera",
+    Numero_De_lote_del_producto: 123456,
+    año_de_caducidad: 2025,
+    dia_de_caducidad: 15,
+    mes_de_caducidad: "Julio",
+    condiciones_de_almacenamiento: "Conservar refrigerado",
+    nutrientes_que_Aporta: "Calcio, Proteínas, Vitaminas",
+    precioPorKilogramo: NumberDecimal("15.75"),//Se pone por la restriccion de la coleccion
+    margen_de_ganancia: NumberDecimal("5.00"),
+    stock_minimo: 10,
+    stock_maximo: 100,
+    punto_de_reorden: 20,
+    stack_disponible: 50,
+    unidad_de_medida: "Kilogramo",
+    foto: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fes%2Ffotos%2Fqueso&psig=AOvVaw3avqj5OtWShyhgCAzQ3WKP&ust=1730048919907000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCMjrjMzErIkDFQAAAAAdAAAAABAE.png"
+});
