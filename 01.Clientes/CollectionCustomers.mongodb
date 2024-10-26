@@ -1,0 +1,126 @@
+// Usar la base de datos 
+// Autor: Jonathan Guizar Morales
+// Número de control: 22420408
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
+use("Cremeria");
+
+// Crear la colección con el esquema y validaciones
+db.createCollection('clientes', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'PrimerNombre', 'ApellidoPaterno', 'Direccion', 'FechaNacimiento'],
+            properties: {
+                codigo: { bsonType: 'int' },
+
+                correo: { 
+                    bsonType: 'string', 
+                    pattern: "^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,4}$" // Formato de email
+                },
+
+                Telefono: { 
+                    bsonType: 'string', 
+                    pattern: "^[0-9]{10}$" // Solo números 10 dígitos para teléfono
+                },
+
+                Genero: { 
+                    bsonType: 'string', 
+                    pattern: "^(Masculino|Femenino|Otro)$" // Género con opciones específicas
+                },
+
+                Edad: { 
+                    bsonType: 'int', 
+                    minimum: 1, 
+                    maximum: 120 // Edad entre entre 1 y 120 años
+                },
+
+                PrimerNombre: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ ]{2,50}$" // Solo letras, 2 y 50 caracteres
+                },
+
+                SegundoNombre: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ ]{0,50}$" // hasta 50 caracteres
+                },
+
+                ApellidoPaterno: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ ]{2,50}$" // 2 y 50 caracteres
+                },
+
+                ApellidoMaterno: { 
+                    bsonType: 'string', 
+                    pattern: "^[A-Za-zÀ-ÿ ]{0,50}$" //hasta 50 caracteres
+                },
+
+                Direccion: { 
+                    bsonType: 'object',
+                    required: ['CodigoPostal', 'Localidad', 'Estado', 'Colonia', 'Avenida', 'NumeroDeVivienda'],
+                    properties: {
+                        CodigoPostal: { 
+                            bsonType: 'string', 
+                            pattern: "^[0-9]{5}$" // 5 dígitos para código postal
+                        },
+                        
+                        Localidad: { 
+                            bsonType: 'string', 
+                            pattern: "^[A-Za-zÀ-ÿ ]{2,40}$" //entre 2 y 40 caracteres
+                        },
+
+                        Estado: { 
+                            bsonType: 'string', 
+                            pattern: "^[A-Za-zÀ-ÿ ]{2,40}$" //entre 2 y 40 caracteres
+                        },
+
+                        Colonia: { 
+                            bsonType: 'string', 
+                            pattern: "^[A-Za-zÀ-ÿ0-9 ]{2,45}$" //entre 2 y 45 caracteres
+                        },
+
+                        Avenida: { 
+                            bsonType: 'string', 
+                            pattern: "^[A-Za-zÀ-ÿ0-9 ]{2,50}$" //entre 2 y 50 caracteres
+                        },
+
+                        NumeroDeVivienda: { 
+                            bsonType: 'int', 
+                            minimum: 1 // Número de vivienda mayor a 0
+                        }
+                    }
+                },
+
+                FechaNacimiento: { 
+                    bsonType: 'object',
+                    required: ['dia', 'mes', 'año'],
+                    properties: {
+                        dia: { 
+                            bsonType: 'int', 
+                            minimum: 1, 
+                            maximum: 31 // Día entre 1 y 31
+                        },
+                        
+                        mes: { 
+                            bsonType: 'string', 
+                            pattern: "^(Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre)$" // Mes completo en español
+                        },
+
+                        año: { 
+                            bsonType: 'int', 
+                            minimum: 1900, 
+                            maximum: 2024 // Año entre 1900 y 2024
+                        }
+                    }
+                }
+            }
+        }          
+    }
+});
+
+// Crear un índice único para el campo 'correo'
+db.clientes.createIndex(
+    { correo: 1 },
+    { unique: true } // No acepta valores duplicados
+);
