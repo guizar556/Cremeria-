@@ -6,11 +6,11 @@
 use("Cremeria");
 
 db.pedidos.insertOne({
-    codigo: 1, // ID único del pedido
-    codigo_Cliente: 123, // ID del cliente (opcional)
-    codigo_Empleado: 456, // ID del empleado (opcional)
-    descripccion_Pedido: "Pedido de 10 litros de leche y 5 kilos de queso.", // Descripción del pedido
-    año_de_pedido: 2024, // Año del pedido
-    dia_de_pedido: 15, // Día del pedido
-    mes_de_pedido: "Octubre" // Mes del pedido
+    codigo: 1, 
+    codigo_Cliente: 123, 
+    codigo_Empleado: 456, 
+    descripccion_Pedido: "Pedido de 10 litros de leche y 5 kilos de queso.", 
+    año_de_pedido: 2024, 
+    dia_de_pedido: 15,
+    mes_de_pedido: "Octubre" 
 });

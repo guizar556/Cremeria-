@@ -11,7 +11,7 @@ db.ventas.insertOne({
     codigo: 1,
     codigo_Pedido: 1,
     año: 2024,
-    descuento_aplicado: NumberDecimal("10.50"), // Usar el tipo decimal para el descuento
+    descuento_aplicado: NumberDecimal("10.50"),
     dia: 15,
     mes: "Octubre",
     tipo_pago: "Tarjeta"

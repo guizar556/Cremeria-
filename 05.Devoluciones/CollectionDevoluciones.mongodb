@@ -42,11 +42,11 @@ db.createCollection('devoluciones', {
                     maximum: 31 // Día entre 1 y 31
                 },
                 foto_Devolucion: { 
-                    bsonType: 'string', // Puede ser un URL o un campo de texto para la foto
+                    bsonType: 'string',
                     pattern: "^(https?://.*\\.(jpg|jpeg|png|gif))?$" // Formato de imagen
                 },
                 hora: { 
-                    bsonType: 'string', // Guardar como string para representar tiempo
+                    bsonType: 'string',
                     pattern: "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" // Formato de 24 horas HH:MM
                 },
                 mes: { 

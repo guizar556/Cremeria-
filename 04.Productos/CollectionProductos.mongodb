@@ -46,8 +46,8 @@ db.createCollection('productos', {
                 },
                 año_de_caducidad: { 
                     bsonType: 'int', 
-                    minimum: 2024, // Año a partir del 2024 en adelante
-                    maximum: 2100 // Limitar el año hasta 2100
+                    minimum: 2000,
+                    maximum: 2024 
                 },
                 dia_de_caducidad: { 
                     bsonType: 'int', 
@@ -96,7 +96,7 @@ db.createCollection('productos', {
                 },
                 foto: {
                     bsonType: 'string',
-                    pattern: "^(https?:\\/\\/.*\\.(jpg|jpeg|png|gif|bmp))$" // URL válida de imagen
+                    pattern: "^(https?:\\/\\/.*\\.(jpg|jpeg|png|gif|bmp))$" 
                 }
             }
         }          
