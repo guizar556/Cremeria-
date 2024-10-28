@@ -1,0 +1,108 @@
+// Usar la base de datos 
+// Autor: Jonathan Guizar Morales
+// Número de control: 22420408
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
+use("Cremeria");
+
+// Crear la colección con el esquema y validaciones simplificadas
+db.createCollection('clientes', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['_id','codigo', 'PrimerNombre', 'ApellidoPaterno', 'Direccion', 'FechaNacimiento'],
+            additionalProperties: false,
+            properties: {
+                _id:{
+                    bsonType:'objectId'
+                },
+                codigo: { 
+                    bsonType: 'int', 
+                    minimum: 1 
+                },
+                correo: { 
+                    bsonType: 'string'
+                },
+                Telefono: { 
+                    bsonType: 'array',
+                    minItems: 1,
+                    maxItems: 3,
+                    items: { bsonType: 'string' },
+                    uniqueItems: true
+                },
+                Genero: { 
+                    bsonType: 'string'
+                },
+                Edad: { 
+                    bsonType: 'int', 
+                    minimum: 1, 
+                    maximum: 120 
+                },
+                PrimerNombre: { 
+                    bsonType: 'string'
+                },
+                SegundoNombre: { 
+                    bsonType: 'string'
+                },
+                ApellidoPaterno: { 
+                    bsonType: 'string'
+                },
+                ApellidoMaterno: { 
+                    bsonType: 'string'
+                },
+                Direccion: { 
+                    bsonType: 'object',
+                    required: ['CodigoPostal', 'Localidad', 'Estado', 'Colonia', 'Avenida', 'NumeroDeVivienda'],
+                    properties: {
+                        CodigoPostal: { 
+                            bsonType: 'string'
+                        },
+                        Localidad: { 
+                            bsonType: 'string'
+                        },
+                        Estado: { 
+                            bsonType: 'string'
+                        },
+                        Colonia: { 
+                            bsonType: 'string'
+                        },
+                        Avenida: { 
+                            bsonType: 'string'
+                        },
+                        NumeroDeVivienda: { 
+                            bsonType: 'int', 
+                            minimum: 1 
+                        }
+                    },
+                },
+                FechaNacimiento: { 
+                    bsonType: 'object',
+                    required: ['dia', 'mes', 'año'],
+                    properties: {
+                        dia: { 
+                            bsonType: 'int', 
+                            minimum: 1, 
+                            maximum: 31 
+                        },
+                        mes: { 
+                            bsonType: 'int', 
+                            minimum: 1,
+                            maximum: 12 
+                        },
+                        año: { 
+                            bsonType: 'int', 
+                            minimum: 1900, 
+                            maximum: 2024 
+                        }
+                    }
+                }
+            }
+        }          
+    }
+});
+
+db.clientes.createIndex(
+    { correo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

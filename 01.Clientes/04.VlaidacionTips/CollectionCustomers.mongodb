@@ -1,22 +1,17 @@
-//Usar la base de datos 
-//Autor Jonathan Guizar Morales
-//Numero de control 22420408
-//Universdad:Tecnologico de Jiqulpan 
-//Poryecto cremeria
+// Usar la base de datos 
+// Autor: Jonathan Guizar Morales
+// Número de control: 22420408
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
 use("Cremeria");
 
-db.getCollectionInfos();
-//Modificar el Esquema 
-db.runCommand({
-    collMod:'clientes',
+// Crear la colección con el esquema y validaciones
+db.createCollection('clientes', {
     validator: {
         $jsonSchema: {
-
-            /*
-            !El cambio que se realizo es el de la edad que sea obligatorio y la fecha de nacimiento el año a 1800
-            */
             bsonType: 'object',
-            required: ['codigo', 'PrimerNombre', 'ApellidoPaterno', 'Direccion', 'FechaNacimiento','Edad'],
+            required: ['codigo', 'PrimerNombre', 'ApellidoPaterno', 'Direccion', 'FechaNacimiento'],
             properties: {
                 codigo: { bsonType: 'int' },
 
@@ -26,7 +21,7 @@ db.runCommand({
                 },
 
                 Telefono: { 
-                    bsonType: 'string', 
+                    bsonType: 'array',
                     pattern: "^[0-9]{10}$" // Solo números 10 dígitos para teléfono
                 },
 
@@ -114,7 +109,7 @@ db.runCommand({
 
                         año: { 
                             bsonType: 'int', 
-                            minimum: 1800, 
+                            minimum: 1900, 
                             maximum: 2024 // Año entre 1900 y 2024
                         }
                     }
@@ -123,3 +118,9 @@ db.runCommand({
         }          
     }
 });
+
+// Crear un índice único para el campo 'correo'
+db.clientes.createIndex(
+    { correo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

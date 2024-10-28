@@ -1,0 +1,32 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+db.clientes.insertOne({
+    codigo: 101,
+    correo: "cliente101@example.com",
+    Telefono: ["5551234567", "5559876543", "5557654321"],
+    Genero: "Masculino",
+    Edad: 28,
+    PrimerNombre: "Juan",
+    SegundoNombre: "Carlos",
+    ApellidoPaterno: "Pérez",
+    ApellidoMaterno: "García",
+    Direccion: {
+        CodigoPostal: "59030",
+        Localidad: "Sahuayo",
+        Estado: "Michoacán",
+        Colonia: "San Onofre",
+        Avenida: "Santa Inés",
+        NumeroDeVivienda: 106
+    },
+    FechaNacimiento: {
+        dia: 15,
+        mes: 7,
+        año: 1995
+    }
+});
+
