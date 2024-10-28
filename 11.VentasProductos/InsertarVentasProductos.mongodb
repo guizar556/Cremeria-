@@ -1,0 +1,18 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.detalles_venta.insertOne({
+    cantidad: 3,
+    codigo: 1050,
+    codigo_Producto: 2025,
+    codigo_Venta: 3055,
+    descripccion: "Venta de queso fresco",
+    precioUnitario: 35.75
+});
+

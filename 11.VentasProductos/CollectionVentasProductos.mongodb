@@ -1,0 +1,49 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+// Crear la colección con el esquema y validaciones ajustadas
+db.createCollection('detalles_venta', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'codigo_Producto', 'codigo_Venta'],
+            properties: {
+                cantidad: { 
+                    bsonType: 'int',
+                    minimum: 1,
+                    description: "Cantidad de productos vendidos" 
+                },
+                codigo: { 
+                    bsonType: 'int', 
+                    description: "Código único del detalle de la venta" 
+                },
+                codigo_Producto: { 
+                    bsonType: 'int', 
+                    description: "Código del producto vendido"
+                },
+                codigo_Venta: { 
+                    bsonType: 'int', 
+                    description: "Código de la venta asociada"
+                },
+                descripccion: { 
+                    bsonType: 'string', 
+                    description: "Descripción opcional del detalle de la venta"
+                },
+                precioUnitario: { 
+                    bsonType: 'double', 
+                    minimum: 0, 
+                    description: "Precio unitario del producto vendido"
+                }
+            }
+        }
+    }
+});
+// Crear un índice único para el campo 'codigo'
+db.detalles_venta.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

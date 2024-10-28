@@ -1,0 +1,21 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.categorias.insertOne({
+    codigo: 102,
+    NombreDeCategoria: "Carnes frías",
+    DescripccionDeCategoria: "Productos como jamón, salchicha y otros embutidos",
+    estado_de_categoria_A_o_I: "A", // Activo
+    foto: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fes%2Ffoto%2Fvarios-productos-l%25C3%25A1cteos-frescos-gm544807136-98033255&psig=AOvVaw1rY8Y-mutacjFrSAe3ivZV&ust=1730159863803000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCICPu_Dhr4kDFQAAAAAdAAAAABAE",
+    fecha_creacion: {
+        año: 2024,
+        mes: "Septiembre",
+        día: 15
+    }
+});

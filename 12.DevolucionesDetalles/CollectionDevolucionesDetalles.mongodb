@@ -1,0 +1,41 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+// Crear la colección 'productos_devueltos' con validaciones corregidas
+db.createCollection('productos_devueltos', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'codigo_Devolucion', 'codigo_VP', 'Observaciones'], 
+            properties: {
+                codigo: {
+                    bsonType: 'int',
+                    description: "Código único del producto devuelto (clave primaria)"
+                },
+                codigo_Devolucion: {
+                    bsonType: 'int',
+                    description: "Código de la devolución asociada"
+                },
+                codigo_VP: {
+                    bsonType: 'int',
+                    description: "Código de la venta o pedido asociado"
+                },
+                Observaciones: {
+                    bsonType: 'string',
+                    pattern: "^[A-Za-z0-9\\s]{10,200}$",
+                    description: "Observaciones sobre el producto devuelto (solo letras, números y espacios)"
+                }
+            }
+        }
+    }
+});
+
+
+db.productos_devueltos.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

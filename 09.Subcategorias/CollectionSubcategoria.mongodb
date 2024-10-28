@@ -1,0 +1,53 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+// Crear la colección con el esquema, validaciones y restricciones
+db.createCollection('subcategorias', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'codigo_Categoria', 'NombreDeSubcategoria'],
+            properties: {
+                codigo: { 
+                    bsonType: 'int', 
+                    description: "Código único de la subcategoría" 
+                },
+                codigo_Categoria: { 
+                    bsonType: 'int', 
+                    description: "Código de la categoría asociada"
+                },
+                NombreDeSubcategoria: { 
+                    bsonType: 'string',
+                    description: "Nombre de la subcategoría"
+                },
+                DescripcionDeSubcategoria: { 
+                    bsonType: 'string',
+                    description: "Descripción detallada de la subcategoría"
+                },
+                marca_de_la_subcategoria: { 
+                    bsonType: 'string',
+                    description: "Marca relacionada con la subcategoría"
+                },
+                tipoDeRotacion: { 
+                    bsonType: 'string',
+                    pattern: "^(alta|media|baja)$",
+                    description: "Tipo de rotación del producto (alta, media o baja)"
+                },
+                foto: { 
+                    bsonType: 'string', 
+                    description: "URL o path de la imagen de la subcategoría"
+                }
+            }
+        }
+    }
+});
+
+// Crear un índice único para el campo 'codigo'
+db.subcategorias.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

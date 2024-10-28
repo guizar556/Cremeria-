@@ -1,0 +1,67 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+// Crear la colección con el esquema, validaciones y restricciones
+db.createCollection('categorias', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'NombreDeCategoria'],
+            properties: {
+                codigo: { 
+                    bsonType: 'int', 
+                    description: "Código único de la categoría" 
+                },
+                NombreDeCategoria: { 
+                    bsonType: 'string',
+                    description: "Nombre de la categoría"
+                },
+                DescripccionDeCategoria: { 
+                    bsonType: 'string',
+                    description: "Descripción detallada de la categoría"
+                },
+                estado_de_categoria_A_o_I: { 
+                    bsonType: 'string',
+                    pattern: "^(A|I)$", 
+                    description: "Estado de la categoría: A (Activo) o I (Inactivo)"
+                },
+                foto: { 
+                    bsonType: 'string', 
+                    description: "URL o path de la imagen de la categoría"
+                },
+                fecha_creacion: {
+                    bsonType: 'object',
+                    required: ['año', 'mes', 'día'],
+                    properties: {
+                        año: { 
+                            bsonType: 'int',
+                            minimum: 2000,
+                            description: "Año de creación de la categoría"
+                        },
+                        mes: { 
+                            bsonType: 'string',
+                            pattern: "^(Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre)$", 
+                            description: "Mes de creación de la categoría"
+                        },
+                        día: { 
+                            bsonType: 'int', 
+                            minimum: 1, 
+                            maximum: 31, 
+                            description: "Día del mes en que se creó la categoría"
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Crear un índice único para el campo 'codigo'
+db.categorias.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

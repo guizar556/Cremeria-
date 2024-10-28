@@ -1,0 +1,19 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.transportes.insertOne({
+    codigo: 1,
+    codigo_Provedore: 1, 
+    DescripccionDelVehiculo: "Camioneta de reparto ligera",
+    foto: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Fvector-premium%2Fcamion-lleno-productos-lacteos_24663565.htm&psig=AOvVaw3F_OwkqLP586tcWSNY2_KV&ust=1727909882948000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCJjnj4mk7ogDFQAAAAAdAAAAABAJ",
+    Marca: "Ford",
+    Modelo: "Ranger",
+    NumeroDePlaca: "ABC1234" 
+});
+

@@ -1,0 +1,16 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.productos_devueltos.insertOne({
+    codigo: 1,
+    codigo_Devolucion: 101,
+    codigo_VP: 202,
+    Observaciones: "Producto devuelto por defectos visibles en el empaque"
+});
+

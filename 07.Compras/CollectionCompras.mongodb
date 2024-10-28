@@ -1,0 +1,69 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+// Crear la colección con el esquema, validaciones y restricciones
+db.createCollection('compras', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'Total_de_Compra', 'fecha_compra'],
+            properties: {
+                codigo: { 
+                    bsonType: 'int', 
+                    description: "Código único de la compra" 
+                },
+                codigo_Proveedor: { 
+                    bsonType: 'int', 
+                    description: "Código del proveedor"
+                },
+                tipoDeCompra: { 
+                    bsonType: 'string',
+                    pattern: "^(mayoreo|menudeo|otro)$",
+                    description: "Tipo de compra realizada (mayoreo, menudeo, otro)"
+                },
+                estado_compra: { 
+                    bsonType: 'string',
+                    pattern: "^(completada|pendiente|cancelada)$", 
+                    description: "Estado actual de la compra (completada, pendiente, cancelada)"
+                },
+                Total_de_Compra: { 
+                    bsonType: 'int', 
+                    minimum: 0, 
+                    description: "Monto total de la compra"
+                },
+                fecha_compra: {
+                    bsonType: 'object',
+                    required: ['año', 'mes', 'día'],
+                    properties: {
+                        año: { 
+                            bsonType: 'int',
+                            minimum: 2000, 
+                            description: "Año de la compra"
+                        },
+                        mes: { 
+                            bsonType: 'string',
+                            pattern: "^(Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre)$", 
+                            description: "Mes de la compra"
+                        },
+                        día: { 
+                            bsonType: 'int', 
+                            minimum: 1, 
+                            maximum: 31, 
+                            description: "Día del mes en que se realizó la compra"
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Crear un índice único para el campo 'codigo'
+db.compras.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);

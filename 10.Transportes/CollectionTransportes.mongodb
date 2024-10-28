@@ -1,0 +1,59 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+// Crear la colección con el esquema, validaciones y restricciones
+db.createCollection('transportes', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo', 'NumeroDePlaca'],
+            properties: {
+                codigo: { 
+                    bsonType: 'int', 
+                    description: "Código único del vehículo del proveedor" 
+                },
+                codigo_Provedore: { 
+                    bsonType: 'int', 
+                    description: "Código del proveedor relacionado con el vehículo"
+                },
+                DescripccionDelVehiculo: { 
+                    bsonType: 'string', 
+                    description: "Descripción opcional del vehículo" 
+                },
+                foto: { 
+                    bsonType: 'string',
+                    description: "URL o ruta de la imagen del vehículo"
+                },
+                Marca: { 
+                    bsonType: 'string',
+                    description: "Marca del vehículo"
+                },
+                Modelo: { 
+                    bsonType: 'string',
+                    description: "Modelo del vehículo"
+                },
+                NumeroDePlaca: { 
+                    bsonType: 'string',
+                    pattern: "^[A-Z0-9]{1,7}$", 
+                    description: "Número de placa del vehículo"
+                }
+            }
+        }
+    }
+});
+
+// Crear un índice único para el campo 'codigo'
+db.transportes.createIndex(
+    { codigo: 1 },
+    { unique: true } // No acepta valores duplicados
+);
+
+db.transportes.createIndex(
+    { NumeroDePlaca: 1 },
+    { unique: true } // No acepta placas duplicadas
+);
+

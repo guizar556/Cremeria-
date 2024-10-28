@@ -1,0 +1,18 @@
+//Usar la base de datos 
+//Autor Jonathan Guizar Morales
+//Numero de control 22420408
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+
+//Insesion de un reguistro 
+db.subcategorias.insertOne({
+    codigo: 201,
+    codigo_Categoria: 101, // Relacionado con la categoría 'Lácteos'
+    NombreDeSubcategoria: "Yogurt",
+    DescripcionDeSubcategoria: "Yogurt de diferentes sabores y presentaciones",
+    marca_de_la_subcategoria: "Lala",
+    tipoDeRotacion: "alta",
+    foto: "https://www.google.com/url?sa=i&url=https%3A%2F%2Fcookidoo.mx%2Frecipes%2Frecipe%2Fes-MX%2Fr91190&psig=AOvVaw2a4LwOl6MzUW2-SU3TOgZ1&ust=1730160221757000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIjM36Tjr4kDFQAAAAAdAAAAABAE"
+});
