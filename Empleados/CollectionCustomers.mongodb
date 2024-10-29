@@ -1,0 +1,150 @@
+﻿// Usar la base de datos 
+// Autor: Osvaldo Gutierrez Sanchez 
+// Número de control: 22420401
+// Universidad: Tecnológico de Jiquilpan
+// Proyecto: Cremería
+
+use("Cremeria");
+
+// Crear la colección con el esquema y validaciones
+db.createCollection('empleados', {
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            required: ['codigo','correo', 'PrimerNombre', 'ApellidoPaterno', 'Edad', 'CodigoPostal'],
+            properties: {
+                codigo: { bsonType: 'int' },
+        codigo: {
+            bsonType: Number,
+            required: true,
+            unique: true,
+            
+          },
+          correo: {
+            bsonType: String,
+            required: true,
+            pattern: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Correo inválido']
+          },
+          primerNombre: {
+            bsonType: String,
+            required: true
+          },
+          segundoNombre: {
+            bsonType: String
+          },
+          apellidoPaterno: {
+            bsonType: String,
+            required: true
+          },
+          apellidoMaterno: {
+            bsonType: String
+          },
+          edad: {
+            bsonType: Number,
+            required: true,
+            minimun: 18,
+            maximun: 100
+          },
+          Direccion: { 
+                    bsonType: 'object',
+                    required: ['codigoPostal', 'localidad', 'estado', 'colonia', 'avenida', 'numeroDeVivienda'],
+                    properties: {
+          localidad: {
+            bsonType: String,
+            required: true
+          },
+          estado: {
+            bsonType: String,
+            required: true
+          },
+          colonia: {
+            bsonType: String,
+            required: true
+          },
+          avenida: {
+            bsonType: String,
+            required: true
+          },
+          numeroDeVivienda: {
+            bsonType: Number,
+            required: true
+          },
+          telefono: {
+            bsonType: String,
+            required: true,
+            pattern: [/^\d{10}$/, 'Teléfono inválido']
+          },
+          codigoPostal: {
+            bsonType: Number,
+            required: true
+           }
+         }
+          },
+           FechaNacimiento: { 
+                    bsonType: 'object',
+                    required: ['diaNacimiento', 'mesNacimiento', 'añoNacimiento'],
+                    properties: {
+          diaNacimiento: {
+            bsonType: Number,
+            required: true,
+            minimun: 1,
+            maximun: 31
+          },
+          mesNacimiento: {
+            bsonType: String,
+            required: true,
+            enum: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+          },
+          anioNacimiento: {
+            bsonType: Number,
+            required: true,
+            minimun: 1900,
+            maximun: new Date()
+          }
+          }
+          },
+          recomendaciones: {
+            bsonType: String
+          },
+          FechaContratacion: {
+            bsonType: 'object',
+            required: ['diaContratacion', 'mesContratacion', 'añoContratacion'],
+            properties: {
+          diaContratacion: {
+            bsonType: Number,
+            required: true,
+            minimun: 1,
+            maximun: 31
+          },
+          mesContratacion: {
+            bsonType: String,
+            required: true,
+            enum: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+          },
+          añoContratacion: {
+            bsonType: Number,
+            required: true,
+            minimun: 1900,
+            maximun: new Date()
+          }
+        }
+      },
+          genero: {
+            bsonType: String,
+            required: true,
+            enum: ['Masculino', 'Femenino', 'Otro']
+          },
+          fotoDelEmpleado: {
+            bsonType: String
+          }
+        }
+    }
+  }
+
+        });
+        
+       // Crear un índice único para el campo 'correo'
+db.empleados.createIndex(
+    { correo: 1 },
+    { unique: true } // No acepta valores duplicados
+);
