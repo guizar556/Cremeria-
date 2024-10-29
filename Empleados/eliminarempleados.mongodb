@@ -1,0 +1,9 @@
+//Usar la base de datos 
+//Autor Osvaldo Gutierrez Sanchez 
+//Numero de control 22420401
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+//Eliminar la coleccion de empleados 
+db.empleados.drop();
