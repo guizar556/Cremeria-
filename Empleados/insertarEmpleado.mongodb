@@ -1,0 +1,41 @@
+//Usar la base de datos 
+//Autor: Osvaldo Gutierrez Sanchez 
+//Numero de control 22420401
+//Universdad:Tecnologico de Jiqulpan 
+//Poryecto cremeria
+use("Cremeria");
+
+db.empleados.insertOne({
+    codigo: 2,
+    correo: "osvaldogutierrez15sanchez@gamil.com",
+    PrimerNombre: "Daniel",
+    SegundoNombre: "Ivan",
+    ApellidoPaterno: "Perez",
+    ApellidoMaterno: "Herrera",
+    edad: 30,
+    Genero: "Masculino",
+    FotoEmpleado: "Introduza su foto",
+       
+        Telefono:"3534567091",
+         recomendaciones: " Es muy puntual y eficiente en los labores del trabajo",
+        Direccion: {
+            Localidad: "Sahuayo",
+            Estado: "Michoacán",
+            Colonia: "Colinas del Tepeyac",
+            Avenida: "Jose Sanchez del Rio",
+            NumeroDeVivienda: 95,
+        codigoPostal: "59000",
+        },
+    FechaNacimiento: {
+        dia: 15,
+        mes: "Abril",
+        año: 2004
+    
+    },
+    Contrataciones: {
+        dia: 20,
+        mes: "Junio",
+        año: 2002
+    }
+});
+
