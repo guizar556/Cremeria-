@@ -1,8 +1,0 @@
-// Usar la base de datos
-use("Cremeria");
-
-// consultar la consulta de susarios 
-// Select * from usuarios
-
-db.proveedores.find()
-
