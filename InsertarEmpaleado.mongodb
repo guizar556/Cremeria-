@@ -1,0 +1,23 @@
+use("Cremeria");
+
+db.proveedores.insertOne(
+    {
+        codigo: 1,
+        PrimerNombre: 'Juan',
+        SegundoNombre: 'Carlos',
+        ApellidoPaterno: 'Pérez',
+        ApellidoMaterno: 'Gómez',
+        Localidad: 'Ciudad de México',
+        Estado: 'CDMX',
+        foto: 'https://example.com/foto-juan-carlos.jpg',
+        Colonia: 'Centro',
+        Avenida: 'Insurgentes',
+        CodigoPostal: 12345,
+        dia_inicio_relacion: 15,
+        mes_inicio_relacion: 5,
+        año_inicio_relacion: 2020,
+        RFC: 'PEGO800101ABC',
+        correo_electronico: 'juancarlos.perez@example.com',
+        telefono: '5551234567'
+    }
+);
