@@ -1,3 +1,0 @@
-use("Cremeria");
-
-db.proveedores.drop()
